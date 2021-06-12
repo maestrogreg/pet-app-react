@@ -31425,20 +31425,7 @@ var _searchParams = _interopRequireDefault(require("./searchParams"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var App = function App() {
-  // return React.createElement("div", {}, [
-  //   React.createElement("h1", {}, "Adopt me!"),
-  //   React.createElement(Pet, {
-  //     name: "preppie",
-  //     animal: "Dog",
-  //     breed: "Rotweiller",
-  //   }),
-  //   React.createElement(Pet, {
-  //     name: "Sanchy",
-  //     animal: "Dog",
-  //     breed: "German Shepherd",
-  //   }),
-  // ]);
-  return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h1", null, "Adopt Me!"), /*#__PURE__*/_react.default.createElement(_searchParams.default, null));
+  return /*#__PURE__*/_react.default.createElement(_react.default.StrictMode, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h1", null, "Adopt Me!"), /*#__PURE__*/_react.default.createElement(_searchParams.default, null)));
 };
 
 (0, _reactDom.render)( /*#__PURE__*/_react.default.createElement(App, null), document.getElementById("root"));

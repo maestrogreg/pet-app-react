@@ -32817,7 +32817,81 @@ var createRoute = function createRoute(basepath) {
 var shouldNavigate = function shouldNavigate(event) {
   return !event.defaultPrevented && event.button === 0 && !(event.metaKey || event.altKey || event.ctrlKey || event.shiftKey);
 }; ////////////////////////////////////////////////////////////////////////
-},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","invariant":"../node_modules/invariant/browser.js","create-react-context":"../node_modules/create-react-context/lib/index.js","react-lifecycles-compat":"../node_modules/react-lifecycles-compat/react-lifecycles-compat.es.js","./lib/utils":"../node_modules/@reach/router/es/lib/utils.js","./lib/history":"../node_modules/@reach/router/es/lib/history.js"}],"Details.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","invariant":"../node_modules/invariant/browser.js","create-react-context":"../node_modules/create-react-context/lib/index.js","react-lifecycles-compat":"../node_modules/react-lifecycles-compat/react-lifecycles-compat.es.js","./lib/utils":"../node_modules/@reach/router/es/lib/utils.js","./lib/history":"../node_modules/@reach/router/es/lib/history.js"}],"Carousel.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+class Carousel extends _react.default.Component {
+  constructor(...args) {
+    super(...args);
+
+    _defineProperty(this, "state", {
+      photos: [],
+      active: 0
+    });
+
+    _defineProperty(this, "handleClick", event => {
+      this.setState({
+        active: Number(event.target.dataset.index)
+      });
+    });
+  }
+
+  static getDerivedStateFromProps({
+    media
+  }) {
+    let photos = ['http://placecorgi.com/600/600'];
+
+    if (media.length) {
+      photos = media.map(({
+        large
+      }) => large);
+    }
+
+    ;
+    return {
+      photos
+    };
+  }
+
+  render() {
+    const {
+      photos,
+      active
+    } = this.state;
+    return /*#__PURE__*/_react.default.createElement("div", {
+      className: "carousel"
+    }, /*#__PURE__*/_react.default.createElement("img", {
+      src: photos[active],
+      alt: "animal"
+    }), /*#__PURE__*/_react.default.createElement("div", {
+      className: "carousel-smaller"
+    }, photos.map((photo, index) => /*#__PURE__*/_react.default.createElement("img", {
+      key: photo,
+      onClick: this.handleClick,
+      src: photo,
+      "data-index": index,
+      className: index === active ? "active" : "",
+      alt: "animal-thumbnail"
+    }))));
+  }
+
+}
+
+;
+var _default = Carousel;
+exports.default = _default;
+},{"react":"../node_modules/react/index.js"}],"Details.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -32829,7 +32903,11 @@ var _react = _interopRequireDefault(require("react"));
 
 var _pet = _interopRequireDefault(require("@frontendmasters/pet"));
 
+var _Carousel = _interopRequireDefault(require("./Carousel"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 // const Details = (props) => {
 //     return(
@@ -32839,11 +32917,12 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //     )
 // }
 class Details extends _react.default.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
+  constructor(...args) {
+    super(...args);
+
+    _defineProperty(this, "state", {
       loading: true
-    };
+    });
   }
 
   componentDidMount() {
@@ -32879,7 +32958,9 @@ class Details extends _react.default.Component {
     } = this.state;
     return /*#__PURE__*/_react.default.createElement("div", {
       className: "details"
-    }, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h1", null, name), /*#__PURE__*/_react.default.createElement("h2", null, /*#__PURE__*/_react.default.createElement("img", {
+    }, /*#__PURE__*/_react.default.createElement(_Carousel.default, {
+      media: media
+    }), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h1", null, name), /*#__PURE__*/_react.default.createElement("h2", null, /*#__PURE__*/_react.default.createElement("img", {
       src: photo,
       alt: description,
       style: {
@@ -32892,7 +32973,7 @@ class Details extends _react.default.Component {
 
 var _default = Details;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","@frontendmasters/pet":"../node_modules/@frontendmasters/pet/index.js"}],"app.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","@frontendmasters/pet":"../node_modules/@frontendmasters/pet/index.js","./Carousel":"Carousel.js"}],"app.js":[function(require,module,exports) {
 "use strict";
 
 var _react = _interopRequireDefault(require("react"));
@@ -32948,7 +33029,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62888" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62005" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

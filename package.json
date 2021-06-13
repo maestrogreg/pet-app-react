@@ -10,6 +10,10 @@
     "dev:mock": "cross-env PET_MOCK=mock parcel src/index.html"
   },
   "devDependencies": {
+    "@babel/core": "^7.14.5",
+    "@babel/plugin-proposal-class-properties": "^7.14.5",
+    "@babel/preset-env": "^7.14.5",
+    "@babel/preset-react": "^7.14.5",
     "babel-eslint": "^10.1.0",
     "cross-env": "^7.0.3",
     "eslint-config-prettier": "^8.3.0",

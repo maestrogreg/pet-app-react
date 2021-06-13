@@ -4,13 +4,12 @@ import Pet from "./Pet";
 import SearchParams from "./searchParams";
 
 const App = () => {
-  
   return (
     <React.StrictMode>
-    <div>
-      <h1>Adopt Me!</h1>
-      <SearchParams />
-    </div>
+      <div>
+        <h1>Adopt Me!</h1>
+        <SearchParams />
+      </div>
     </React.StrictMode>
   );
 };
